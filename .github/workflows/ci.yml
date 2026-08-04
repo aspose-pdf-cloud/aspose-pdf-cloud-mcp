@@ -94,7 +94,6 @@ jobs:
         with:
           args: >-
             --root-dir "${{ github.workspace }}"
-            --no-progress
-            --exclude-mail
+            --no-progress            
             './**/*.md'
           fail: true
