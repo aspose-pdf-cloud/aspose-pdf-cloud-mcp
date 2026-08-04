@@ -1,0 +1,29 @@
+# Normalize text files in the repository while preserving platform-specific scripts.
+* text=auto
+
+*.py text eol=lf
+*.gitattributes text eol=lf
+*.gitignore text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# setuptools-scm generates this module during builds.
+src/aspose_pdf_cloud_mcp/_version.py linguist-generated=true
+
+# Keep binary assets out of text conversion and diffs.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.zip binary
+*.whl binary

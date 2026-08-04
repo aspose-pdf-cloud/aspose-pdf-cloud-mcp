@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aspose.PDF Cloud MCP"
+  short_description: "Use Aspose PDF Cloud through Aspose.PDF MCP"
+  default_prompt: "Use $aspose-pdf-cloud-mcp to configure Aspose.PDF Cloud MCP and work with PDFs in Aspose storage."

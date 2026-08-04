@@ -1,0 +1,37 @@
+name: Live Aspose.PDF Cloud tests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-tests:
+    runs-on: ubuntu-latest
+    environment: live-tests
+    env:
+      ASPOSE_CLIENT_ID: ${{ secrets.ASPOSE_CLIENT_ID }}
+      ASPOSE_CLIENT_SECRET: ${{ secrets.ASPOSE_CLIENT_SECRET }}
+      ASPOSE_STORAGE_NAME: ${{ secrets.ASPOSE_STORAGE_NAME }}
+      ASPOSE_BASE_URL: ${{ secrets.ASPOSE_BASE_URL }}
+      ASPOSE_SELF_HOST: ${{ secrets.ASPOSE_SELF_HOST }}
+      ASPOSE_RUN_LIVE_TESTS: "1"
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Require live credentials
+        shell: bash
+        run: |
+          test -n "$ASPOSE_CLIENT_ID"
+          test -n "$ASPOSE_CLIENT_SECRET"
+      - name: Install project
+        run: python -m pip install --upgrade pip ".[dev]"
+      - name: Run live tests
+        run: python -m pytest -q -m live

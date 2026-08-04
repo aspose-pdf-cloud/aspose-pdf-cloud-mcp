@@ -1,0 +1,12 @@
+[mcp_servers.aspose_pdf_cloud]
+command = "aspose-pdf-cloud-cli"
+args = ["mcp", "serve"]
+env_vars = [
+  "ASPOSE_CLIENT_ID",
+  "ASPOSE_CLIENT_SECRET",
+  "ASPOSE_STORAGE_NAME",
+  "ASPOSE_BASE_URL",
+  "ASPOSE_SELF_HOST"
+]
+startup_timeout_sec = 20
+tool_timeout_sec = 120
