@@ -24,7 +24,7 @@ python -m pip install -e ".[dev]"
 Development extras include testing and distribution tools. Versions are
 generated from Git tags; clone with history rather than using GitHub source
 ZIP archives. Maintainers should follow `docs/publishing.md` in the repository
-for PyPI trusted publishing setup and `vX.Y.Z` releases.
+for PyPI API token setup and `vX.Y.Z` releases.
 
 ## Environment
 

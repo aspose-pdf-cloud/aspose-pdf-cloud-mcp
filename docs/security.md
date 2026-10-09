@@ -53,6 +53,7 @@ are written with owner-only permissions where the platform supports them.
 
 ## CI and Publishing
 
-The PyPI publish workflow uses trusted publishing and does not require a
-PyPI API token. Keep the PyPI trusted publisher scoped to this repository,
-the `publish.yml` workflow, and the `pypi` environment.
+The PyPI publish workflow uses a project-scoped `PYPI_API_TOKEN` secret from
+the selected GitHub environment (`pypi` for tag pushes, `testpypi` for manual
+rehearsals). Keep those environment secrets scoped to this repository and
+rotate them if exposure is suspected.

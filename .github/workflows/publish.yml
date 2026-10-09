@@ -27,7 +27,6 @@ jobs:
       url: ${{ github.event_name == 'workflow_dispatch' && 'https://test.pypi.org/project/aspose-pdf-cloud-mcp/' || 'https://pypi.org/project/aspose-pdf-cloud-mcp/' }}
     permissions:
       contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -43,7 +42,9 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: python scripts/check_distribution.py dist --release-tag "$RELEASE_TAG"
-      - name: Publish with PyPI trusted publishing
+      - name: Publish with PyPI API token
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          attestations: false
           repository-url: ${{ github.event_name == 'workflow_dispatch' && 'https://test.pypi.org/legacy/' || 'https://upload.pypi.org/legacy/' }}

@@ -75,9 +75,9 @@ test output, logs, or prompts. See [security.md](security.md).
 
 ## Publishing
 
-Publishing is handled by GitHub Actions with PyPI trusted publishing.
-Follow [publishing.md](publishing.md) for account setup, GitHub environments,
-release tags, TestPyPI checks, and troubleshooting. No PyPI token is required.
+Publishing is handled by GitHub Actions using a `PYPI_API_TOKEN` secret in the
+target GitHub environment. Follow [publishing.md](publishing.md) for account
+setup, environment secrets, release tags, TestPyPI checks, and troubleshooting.
 
 ## Continuous integration
 
