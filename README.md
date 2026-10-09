@@ -1,7 +1,11 @@
-# Aspose.PDF Cloud CLI + MCP Tools
+# Aspose.PDF Cloud CLI + MCP Tools v1.1.0
 
 Aspose.PDF Cloud CLI exposes Aspose PDF Cloud storage and PDF operations through
 both a command-line interface and an MCP server.
+
+Version 1.1.0 adds PDF attachment listing and extraction, upgrades the MCP
+server to the MCP Python SDK 2.x, and adds Git-based package versioning and
+release automation. See [CHANGELOG.md](CHANGELOG.md) for the release notes.
 
 ## How to Get Your Aspose.PDF Cloud Credentials
 
@@ -11,6 +15,9 @@ both a command-line interface and an MCP server.
 4. Copy the **Client ID** and **Client Secret** for later use.
 
 ## Installation
+
+Requires Python 3.11 or later. Version 1.1.0 uses Aspose.PDF Cloud SDK 26.x
+and MCP Python SDK 2.x; pip installs these dependencies automatically.
 
 Install from PyPI:
 
@@ -56,7 +63,7 @@ Optional environment variables:
 - `ASPOSE_SELF_HOST`: set to `1`, `true`, `yes`, or `on` for self-hosted use.
 
 You can also create a local `.env` file. See
-[`.env.example`](.env.example) for a template. Environment variables take
+[`.env.example`](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/.env.example) for a template. Environment variables take
 precedence over `.env` values.
 
 ## CLI Usage
@@ -98,13 +105,13 @@ aspose-pdf-cloud-cli mcp serve
 ```
 
 Codex MCP configuration examples are available in
-[docs/mcp-config.md](docs/mcp-config.md), with a copy-pasteable helper at
-[examples/codex-mcp-config.toml](examples/codex-mcp-config.toml).
+[docs/mcp-config.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/mcp-config.md), with a copy-pasteable helper at
+[examples/codex-mcp-config.toml](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/examples/codex-mcp-config.toml).
 
 ## Codex Prompts
 
 Sample prompts for using this MCP server with Codex are in
-[docs/codex-prompts.md](docs/codex-prompts.md).
+[docs/codex-prompts.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/codex-prompts.md).
 
 ## Install as an Agent Skill
 
@@ -124,4 +131,29 @@ aspose-pdf-cloud-cli skill install claude-code --project
 ```
 
 Use `--force` to replace an existing installed copy. More details are in
-[docs/agent-skill.md](docs/agent-skill.md).
+[docs/agent-skill.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/agent-skill.md).
+
+## Extract PDF attachments
+
+The PDF must already be in Aspose storage. List embedded files, download one
+by its one-based index, or download all of them:
+
+```powershell
+apdf pdf list-attachments sample.pdf
+apdf pdf extract-attachment sample.pdf 1 ./report.txt
+apdf pdf extract-attachments sample.pdf ./attachments
+```
+
+All three commands support `--folder` and `--storage`. Extraction writes local
+files and refuses existing outputs unless `--overwrite` is specified. Bulk
+extraction prefixes filenames with their index (for example `1-report.txt`),
+preserving duplicate names safely. Unsafe embedded filenames are rejected
+before downloads. Empty PDFs produce an empty list. Each local file is written
+atomically; a later download failure can leave earlier completed files.
+
+Equivalent MCP tools are `list_attachments(name, folder, storage)`,
+`extract_attachment(name, index, local_path, folder, storage, overwrite)`, and
+`extract_attachments(name, output_dir, folder, storage, overwrite)`. Listing
+returns `attachments` with metadata and `index`; single extraction returns
+`local_path`; bulk extraction returns `attachments`, `output_dir`, and `files`.
+These tools use the standard MCP success/error envelope.

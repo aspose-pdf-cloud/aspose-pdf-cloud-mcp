@@ -25,9 +25,9 @@ def list_files(path: str, storage_name: str | None = None) -> ToolResponse:
 
 @mcp.tool()
 def upload_file(
-    local_path: str,
-    remote_path: str,
-    storage_name: str | None = None,
+        local_path: str,
+        remote_path: str,
+        storage_name: str | None = None,
 ) -> ToolResponse:
     """Upload a local file to Aspose storage."""
 
@@ -36,11 +36,11 @@ def upload_file(
 
 @mcp.tool()
 def download_file(
-    remote_path: str,
-    local_path: str,
-    storage_name: str | None = None,
-    version_id: str | None = None,
-    overwrite: bool = False,
+        remote_path: str,
+        local_path: str,
+        storage_name: str | None = None,
+        version_id: str | None = None,
+        overwrite: bool = False,
 ) -> ToolResponse:
     """Download a file from Aspose storage."""
 
@@ -56,11 +56,11 @@ def download_file(
 
 @mcp.tool()
 def merge_pdfs(
-    inputs: list[str] | None,
-    output_name: str,
-    folder: str | None = None,
-    storage: str | None = None,
-    from_folder: str | None = None,
+        inputs: list[str] | None,
+        output_name: str,
+        folder: str | None = None,
+        storage: str | None = None,
+        from_folder: str | None = None,
 ) -> ToolResponse:
     """Merge PDF files already present in Aspose storage."""
 
@@ -69,10 +69,10 @@ def merge_pdfs(
 
 @mcp.tool()
 def split_pdf(
-    name: str,
-    ranges: str | None = None,
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        ranges: str | None = None,
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """Split a PDF into single pages or page-range segments."""
 
@@ -88,11 +88,11 @@ def list_pdfa_versions() -> ToolResponse:
 
 @mcp.tool()
 def convert_pdf_to_pdfa(
-    name: str,
-    out_path: str,
-    pdfa_version: str = "PDF/A-1B",
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        out_path: str,
+        pdfa_version: str = "PDF/A-1B",
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """Convert a PDF in Aspose storage to a selected PDF/A version."""
 
@@ -108,9 +108,9 @@ def convert_pdf_to_pdfa(
 
 @mcp.tool()
 def extract_text(
-    name: str,
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """Extract text from a PDF in Aspose storage."""
 
@@ -119,10 +119,10 @@ def extract_text(
 
 @mcp.tool()
 def extract_tables(
-    name: str,
-    pages: str | None = None,
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        pages: str | None = None,
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """Extract tables from a PDF in Aspose storage."""
 
@@ -131,10 +131,10 @@ def extract_tables(
 
 @mcp.tool()
 def list_images(
-    name: str,
-    pages: str | None = None,
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        pages: str | None = None,
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """List images in a PDF in Aspose storage."""
 
@@ -143,12 +143,12 @@ def list_images(
 
 @mcp.tool()
 def extract_images(
-    name: str,
-    pages: str | None = None,
-    dest_folder: str | None = None,
-    image_format: str = "png",
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        pages: str | None = None,
+        dest_folder: str | None = None,
+        image_format: str = "png",
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """Extract all images from a PDF or selected pages."""
 
@@ -165,13 +165,13 @@ def extract_images(
 
 @mcp.tool()
 def extract_image(
-    name: str,
-    page: int,
-    index: int,
-    dest_folder: str | None = None,
-    image_format: str = "png",
-    folder: str | None = None,
-    storage: str | None = None,
+        name: str,
+        page: int,
+        index: int,
+        dest_folder: str | None = None,
+        image_format: str = "png",
+        folder: str | None = None,
+        storage: str | None = None,
 ) -> ToolResponse:
     """Extract one image by its one-based index on a page."""
 
@@ -184,6 +184,54 @@ def extract_image(
         image_format,
         folder,
         storage,
+    )
+
+
+@mcp.tool()
+def list_attachments(
+    name: str, folder: str | None = None, storage: str | None = None
+) -> ToolResponse:
+    """List embedded attachments with one-based indexes and metadata."""
+    return call_tool(operations.list_attachments, name, folder, storage)
+
+
+@mcp.tool()
+def extract_attachment(
+    name: str,
+    index: int,
+    local_path: str,
+    folder: str | None = None,
+    storage: str | None = None,
+    overwrite: bool = False,
+) -> ToolResponse:
+    """Download one embedded attachment to a local file."""
+    return call_tool(
+        operations.extract_attachment,
+        name,
+        index,
+        local_path,
+        folder,
+        storage,
+        overwrite=overwrite,
+    )
+
+
+@mcp.tool()
+def extract_attachments(
+    name: str,
+    output_dir: str,
+    folder: str | None = None,
+    storage: str | None = None,
+    overwrite: bool = False,
+) -> ToolResponse:
+    """Download all embedded attachments to a local directory."""
+    return call_tool(
+        operations.extract_attachments,
+        name,
+        output_dir,
+        folder,
+        storage,
+        overwrite=overwrite,
     )
 
 

@@ -17,10 +17,13 @@ from .document_operations import (
     supported_pdfa_versions,
 )
 from .extraction_operations import (
+    extract_attachment,
+    extract_attachments,
     extract_image,
     extract_images,
     extract_tables,
     extract_text,
+    list_attachments,
     list_images,
 )
 from .output_operations import write_json_output, write_text_output
@@ -32,11 +35,14 @@ __all__ = [
     "asposepdfcloud",
     "convert_pdf_to_pdfa",
     "download_file",
+    "extract_attachment",
+    "extract_attachments",
     "extract_image",
     "extract_images",
     "extract_tables",
     "extract_text",
     "format_pdfa_version",
+    "list_attachments",
     "list_files",
     "list_images",
     "list_pdfa_versions",

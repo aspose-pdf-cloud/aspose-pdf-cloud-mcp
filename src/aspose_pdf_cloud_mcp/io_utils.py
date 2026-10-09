@@ -53,11 +53,11 @@ def _commit_temporary(temp_path: Path, destination: Path, *, overwrite: bool) ->
 
 
 def atomic_write(
-    path: str | Path,
-    writer: Callable[[BinaryIO], object],
-    *,
-    overwrite: bool = False,
-    mode: int | None = None,
+        path: str | Path,
+        writer: Callable[[BinaryIO], object],
+        *,
+        overwrite: bool = False,
+        mode: int | None = None,
 ) -> Path:
     """Write a local file through a same-directory temporary file."""
 
@@ -94,11 +94,11 @@ def atomic_write_bytes(path: str | Path, data: bytes, *, overwrite: bool = False
 
 
 def atomic_write_text(
-    path: str | Path,
-    text: str,
-    *,
-    overwrite: bool = False,
-    mode: int | None = None,
+        path: str | Path,
+        text: str,
+        *,
+        overwrite: bool = False,
+        mode: int | None = None,
 ) -> Path:
     """Atomically write UTF-8 text to a local file."""
 
@@ -111,10 +111,10 @@ def atomic_write_text(
 
 
 def atomic_copy_stream(
-    path: str | Path,
-    source: BinaryIO,
-    *,
-    overwrite: bool = False,
+        path: str | Path,
+        source: BinaryIO,
+        *,
+        overwrite: bool = False,
 ) -> Path:
     """Atomically copy a readable binary stream to a local file."""
 

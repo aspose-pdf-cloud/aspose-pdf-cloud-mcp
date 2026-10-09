@@ -69,3 +69,13 @@ Use the Aspose.PDF MCP tools, but do not print credentials or raw environment va
 ```text
 Run a small smoke check by listing storage only. Do not upload, download, or delete files.
 ```
+# Embedded PDF attachments
+
+Use `apdf pdf list-attachments sample.pdf` to inspect attachment metadata and
+one-based indexes. Use `apdf pdf extract-attachment sample.pdf 1 ./report.txt`
+for one local file, or `apdf pdf extract-attachments sample.pdf ./attachments`
+for all embedded files. Add `--folder` / `--storage` to locate the source PDF.
+Existing outputs require explicit `--overwrite`. Bulk filenames have an index
+prefix and unsafe filenames are rejected. Failed bulk downloads may leave
+earlier completed files. Equivalent MCP tools: `list_attachments`,
+`extract_attachment`, `extract_attachments`; output paths are local to the server.

@@ -7,31 +7,24 @@ permissions:
   contents: read
 
 jobs:
-  live-tests:
+  live:
     runs-on: ubuntu-latest
     environment: live-tests
-    env:
-      ASPOSE_CLIENT_ID: ${{ secrets.ASPOSE_CLIENT_ID }}
-      ASPOSE_CLIENT_SECRET: ${{ secrets.ASPOSE_CLIENT_SECRET }}
-      ASPOSE_STORAGE_NAME: ${{ secrets.ASPOSE_STORAGE_NAME }}
-      ASPOSE_BASE_URL: ${{ secrets.ASPOSE_BASE_URL }}
-      ASPOSE_SELF_HOST: ${{ secrets.ASPOSE_SELF_HOST }}
-      ASPOSE_RUN_LIVE_TESTS: "1"
-
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
-          cache: pip
-      - name: Require live credentials
-        shell: bash
-        run: |
-          test -n "$ASPOSE_CLIENT_ID"
-          test -n "$ASPOSE_CLIENT_SECRET"
-      - name: Install project
-        run: python -m pip install --upgrade pip ".[dev]"
-      - name: Run live tests
+          python-version: '3.11'
+      - run: python -m pip install -e '.[dev]'
+      - name: Run authorized cloud smoke tests
+        env:
+          ASPOSE_RUN_LIVE_TESTS: '1'
+          ASPOSE_CLIENT_ID: ${{ secrets.ASPOSE_CLIENT_ID }}
+          ASPOSE_CLIENT_SECRET: ${{ secrets.ASPOSE_CLIENT_SECRET }}
+          ASPOSE_STORAGE_NAME: ${{ secrets.ASPOSE_STORAGE_NAME }}
+          ASPOSE_BASE_URL: ${{ secrets.ASPOSE_BASE_URL }}
+          ASPOSE_SELF_HOST: ${{ secrets.ASPOSE_SELF_HOST }}
         run: python -m pytest -q -m live

@@ -1,8 +1,40 @@
+import pytest
 from typer.testing import CliRunner
 
 from aspose_pdf_cloud_mcp import cli, mcp_server
 
 runner = CliRunner()
+
+
+@pytest.mark.parametrize(
+    "operation,command,extra",
+    [
+        ("list_attachments", "list-attachments", []),
+        ("extract_attachment", "extract-attachment", ["2", "output.txt"]),
+        ("extract_attachments", "extract-attachments", ["output"]),
+    ],
+)
+def test_attachment_transport_contract(monkeypatch, operation, command, extra):
+    calls = []
+
+    def fake(*args, **kwargs):
+        calls.append((tuple(str(arg) for arg in args), kwargs))
+        return {"attachments": []}
+
+    monkeypatch.setattr(cli.operations, operation, fake)
+    options = ["--folder", "docs", "--storage", "store"]
+    if extra:
+        options.append("--overwrite")
+    result = runner.invoke(cli.app, ["pdf", command, "sample.pdf", *extra, *options])
+    args = ["sample.pdf", *extra, "docs", "store"]
+    if operation == "extract_attachment":
+        args[1] = 2
+    response = getattr(mcp_server, operation)(
+        *args, **({"overwrite": True} if extra else {})
+    )
+    assert result.exit_code == 0, result.output
+    assert response["ok"] is True
+    assert calls[0] == calls[1]
 
 
 def test_merge_cli_and_mcp_forward_the_same_operation_contract(monkeypatch):
@@ -43,7 +75,9 @@ def test_download_cli_and_mcp_forward_overwrite_consistently(monkeypatch, tmp_pa
         *,
         overwrite=False,
     ):
-        calls.append((remote_path, str(local_path), storage_name, version_id, overwrite))
+        calls.append(
+            (remote_path, str(local_path), storage_name, version_id, overwrite)
+        )
         return {"local_path": str(local_path)}
 
     monkeypatch.setattr(cli.operations, "download_file", download)

@@ -1,18 +1,43 @@
 # Development
 
+Use a virtual environment belonging to this checkout. In PowerShell, set it
+up and install the package together with its test dependencies:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pytest -q -m "not live"
+```
+
+If the environment was created with uv and has no pip, install with
+`uv pip install --python .\.venv\Scripts\python.exe -e ".[dev]"` instead.
+
+In PyCharm, select this checkout's `.venv\Scripts\python.exe` as the project
+and module interpreter. An interpreter pointing to a moved or deleted checkout
+prevents tests from starting. Collection errors such as `No module named
+'aspose_pdf_cloud_mcp'`, `typer`, or `mcp` mean the editable installation or its
+dependencies are missing from the selected interpreter; repeat the install
+command using that interpreter.
+
 Run the default unit test suite:
 
 ```powershell
-python -m pytest -q
+python -m pytest -q -m "not live"
 ```
 
-Run the same local quality gates used by CI:
+Install development tools with `python -m pip install -e ".[dev]"`.
+Run the same unit test and coverage gate used by CI:
+
+```powershell
+python -m pytest -q -m "not live" --cov=aspose_pdf_cloud_mcp --cov-report=term-missing
+```
+
+Additional local checks (Ruff and mypy currently use their default settings):
 
 ```powershell
 python -m ruff format --check src test
 python -m ruff check src test
-python -m mypy
-python -m pytest -q --cov=aspose_pdf_cloud_mcp --cov-report=term-missing
+python -m mypy src/aspose_pdf_cloud_mcp
 python -m pip_audit .
 ```
 
@@ -51,25 +76,16 @@ test output, logs, or prompts. See [security.md](security.md).
 ## Publishing
 
 Publishing is handled by GitHub Actions with PyPI trusted publishing.
-
-1. In PyPI, add a trusted publisher for repository
-   `aspose-pdf-cloud/aspose-pdf-cloud-mcp`, workflow `publish.yml`, environment `pypi`,
-   and project name `aspose-pdf-cloud-mcp`.
-2. Ensure the release commit is clean and all tests pass. The package version
-   is generated from Git metadata by `setuptools-scm`; do not edit a version
-   string in the source tree.
-3. Create and push a `vX.Y.Z` version tag, for example:
-
-```powershell
-git tag v1.0.0
-git push origin v1.0.0
-```
+Follow [publishing.md](publishing.md) for account setup, GitHub environments,
+release tags, TestPyPI checks, and troubleshooting. No PyPI token is required.
 
 ## Continuous integration
 
 `.github/workflows/ci.yml` runs unit tests on Python 3.11, 3.12, and 3.13,
-enforces formatting, linting, typing, and coverage, audits runtime dependencies,
-checks documentation links, and smoke-tests built distributions.
+enforces the 75% coverage floor, builds and validates distributions, and
+smoke-tests the installed wheel, console commands, MCP imports, and bundled
+skill. Formatting, linting, typing, dependency auditing, and documentation
+link checks are additional local checks, not enforced CI gates.
 
 Live cloud tests are isolated in `.github/workflows/live-tests.yml`. They run
 only through manual dispatch using credentials stored in the protected
