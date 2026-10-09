@@ -1,5 +1,24 @@
 # Development
 
+Use a virtual environment belonging to this checkout. In PowerShell, set it
+up and install the package together with its test dependencies:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pytest -q -m "not live"
+```
+
+If the environment was created with uv and has no pip, install with
+`uv pip install --python .\.venv\Scripts\python.exe -e ".[dev]"` instead.
+
+In PyCharm, select this checkout's `.venv\Scripts\python.exe` as the project
+and module interpreter. An interpreter pointing to a moved or deleted checkout
+prevents tests from starting. Collection errors such as `No module named
+'aspose_pdf_cloud_mcp'`, `typer`, or `mcp` mean the editable installation or its
+dependencies are missing from the selected interpreter; repeat the install
+command using that interpreter.
+
 Run the default unit test suite:
 
 ```powershell
