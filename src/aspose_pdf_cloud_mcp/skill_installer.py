@@ -51,11 +51,11 @@ def default_skill_root(client: str, project: bool = False) -> Path:
 
 
 def install_skill(
-    client: str,
-    *,
-    target_dir: str | Path | None = None,
-    project: bool = False,
-    force: bool = False,
+        client: str,
+        *,
+        target_dir: str | Path | None = None,
+        project: bool = False,
+        force: bool = False,
 ) -> SkillInstallResult:
     """Install the bundled skill into a client skill directory."""
 

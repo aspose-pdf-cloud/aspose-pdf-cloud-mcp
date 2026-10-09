@@ -56,12 +56,12 @@ def _optional_text(value: str | None, field: str) -> str | None:
 
 
 def _remote_path(
-    value: str,
-    field: str,
-    *,
-    allow_root: bool = False,
-    allow_folder: bool = False,
-    require_pdf: bool = False,
+        value: str,
+        field: str,
+        *,
+        allow_root: bool = False,
+        allow_folder: bool = False,
+        require_pdf: bool = False,
 ) -> str:
     clean = _require_text(value, field)
     if "\\" in clean:
@@ -101,7 +101,7 @@ def _normalized_image_format(image_format: str) -> str:
 
 
 def _api_and_config(
-    api: Any | None, config: AsposeConfig | None
+        api: Any | None, config: AsposeConfig | None
 ) -> tuple[Any, AsposeConfig | None]:
     if api is not None:
         return api, config
@@ -137,11 +137,11 @@ def to_plain_data(value: Any) -> Any:
 
 
 def list_files(
-    path: str,
-    storage_name: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        path: str,
+        storage_name: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> StorageListResult:
     path = _remote_path(path, "Storage path", allow_root=True, allow_folder=True)
     pdf_api, cfg = _api_and_config(api, config)
@@ -254,11 +254,11 @@ def normalize_pdfa_version(version: str) -> str:
 
 
 def test_auth(
-    path: str = "/",
-    storage_name: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        path: str = "/",
+        storage_name: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     """Validate Aspose.PDF credentials with a harmless storage listing."""
 
@@ -277,12 +277,12 @@ def test_auth(
 
 
 def upload_file(
-    local_path: str | Path,
-    remote_path: str,
-    storage_name: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        local_path: str | Path,
+        remote_path: str,
+        storage_name: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     source = Path(local_path)
     if not source.is_file():
@@ -306,14 +306,14 @@ def upload_file(
 
 
 def download_file(
-    remote_path: str,
-    local_path: str | Path,
-    storage_name: str | None = None,
-    version_id: str | None = None,
-    *,
-    overwrite: bool = False,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        remote_path: str,
+        local_path: str | Path,
+        storage_name: str | None = None,
+        version_id: str | None = None,
+        *,
+        overwrite: bool = False,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> DownloadResult:
     remote_path = _remote_path(remote_path, "Remote path")
     destination = Path(local_path)
@@ -353,14 +353,14 @@ def download_file(
 
 
 def merge_pdfs(
-    inputs: Sequence[str] | None,
-    output_name: str,
-    folder: str | None = None,
-    storage: str | None = None,
-    from_folder: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        inputs: Sequence[str] | None,
+        output_name: str,
+        folder: str | None = None,
+        storage: str | None = None,
+        from_folder: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     output_name = _remote_path(output_name, "Merge output", require_pdf=True)
     folder = None if folder is None else _remote_folder(folder, "Output folder")
@@ -414,13 +414,13 @@ def _normalize_split_documents(data: Any) -> list[dict[str, Any]]:
 
 
 def split_pdf(
-    name: str,
-    ranges: str | None = None,
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        ranges: str | None = None,
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     """Split a PDF into single pages or explicit page-range segments."""
 
@@ -467,14 +467,14 @@ def split_pdf(
 
 
 def convert_pdf_to_pdfa(
-    name: str,
-    out_path: str,
-    pdfa_version: str,
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        out_path: str,
+        pdfa_version: str,
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     """Convert a PDF in Aspose storage to PDF/A and save it back to storage."""
 
@@ -610,12 +610,12 @@ def _normalize_tables(data: Any) -> list[dict[str, Any]]:
 
 
 def extract_text(
-    name: str,
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> TextExtractionResult:
     name = _remote_path(name, "PDF name", require_pdf=True)
     folder = None if folder is None else _remote_folder(folder, "Document folder")
@@ -643,13 +643,13 @@ def extract_text(
 
 
 def extract_tables(
-    name: str,
-    pages: str | None = None,
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        pages: str | None = None,
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     name = _remote_path(name, "PDF name", require_pdf=True)
     folder = None if folder is None else _remote_folder(folder, "Document folder")
@@ -702,13 +702,13 @@ def extract_tables(
 
 
 def list_images(
-    name: str,
-    pages: str | None = None,
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        pages: str | None = None,
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     name = _remote_path(name, "PDF name", require_pdf=True)
     folder = None if folder is None else _remote_folder(folder, "Document folder")
@@ -756,15 +756,15 @@ def list_images(
 
 
 def extract_images(
-    name: str,
-    pages: str | None = None,
-    dest_folder: str | None = None,
-    image_format: str = "png",
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        pages: str | None = None,
+        dest_folder: str | None = None,
+        image_format: str = "png",
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     name = _remote_path(name, "PDF name", require_pdf=True)
     folder = None if folder is None else _remote_folder(folder, "Document folder")
@@ -814,16 +814,16 @@ def extract_images(
 
 
 def extract_image(
-    name: str,
-    page: int,
-    index: int,
-    dest_folder: str | None = None,
-    image_format: str = "png",
-    folder: str | None = None,
-    storage: str | None = None,
-    *,
-    api: Any | None = None,
-    config: AsposeConfig | None = None,
+        name: str,
+        page: int,
+        index: int,
+        dest_folder: str | None = None,
+        image_format: str = "png",
+        folder: str | None = None,
+        storage: str | None = None,
+        *,
+        api: Any | None = None,
+        config: AsposeConfig | None = None,
 ) -> dict[str, Any]:
     if page < 1:
         raise AsposePdfToolError("Page numbers must be positive integers.", code="validation_error")
@@ -878,10 +878,10 @@ def extract_image(
 
 
 def write_text_output(
-    path: str | Path,
-    text: str,
-    *,
-    overwrite: bool = False,
+        path: str | Path,
+        text: str,
+        *,
+        overwrite: bool = False,
 ) -> OutputResult:
     """Atomically write extracted text to a local path."""
 
@@ -890,10 +890,10 @@ def write_text_output(
 
 
 def write_json_output(
-    path: str | Path,
-    data: Any,
-    *,
-    overwrite: bool = False,
+        path: str | Path,
+        data: Any,
+        *,
+        overwrite: bool = False,
 ) -> OutputResult:
     """Atomically write JSON output to a local path."""
 

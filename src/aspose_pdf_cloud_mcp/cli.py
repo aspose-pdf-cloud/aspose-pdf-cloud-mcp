@@ -51,11 +51,11 @@ def _run(action: Callable[[], T]) -> T:
 
 @auth_app.command("status")
 def auth_status(
-    env_file: Annotated[
-        Path | None,
-        typer.Option("--env-file", help="Local .env file to inspect."),
-    ] = Path(".env"),
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        env_file: Annotated[
+            Path | None,
+            typer.Option("--env-file", help="Local .env file to inspect."),
+        ] = Path(".env"),
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
 ) -> None:
     """Show redacted Aspose.PDF credential configuration status."""
 
@@ -89,34 +89,34 @@ def auth_status(
 
 @auth_app.command("login")
 def auth_login(
-    env_file: Annotated[
-        Path,
-        typer.Option("--env-file", help="Local .env file to write."),
-    ] = Path(".env"),
-    client_id: Annotated[
-        str | None,
-        typer.Option("--client-id", help="Aspose Cloud client ID."),
-    ] = None,
-    client_secret: Annotated[
-        str | None,
-        typer.Option("--client-secret", help="Aspose Cloud client secret."),
-    ] = None,
-    storage_name: Annotated[
-        str | None,
-        typer.Option("--storage", help="Default Aspose storage name."),
-    ] = None,
-    base_url: Annotated[
-        str | None,
-        typer.Option("--base-url", help="Alternate Aspose PDF Cloud base URL."),
-    ] = None,
-    self_host: Annotated[
-        bool,
-        typer.Option("--self-host/--no-self-host", help="Use self-hosted Aspose PDF Cloud."),
-    ] = False,
-    force: Annotated[
-        bool,
-        typer.Option("--force", help="Overwrite existing Aspose.PDF values in the env file."),
-    ] = False,
+        env_file: Annotated[
+            Path,
+            typer.Option("--env-file", help="Local .env file to write."),
+        ] = Path(".env"),
+        client_id: Annotated[
+            str | None,
+            typer.Option("--client-id", help="Aspose Cloud client ID."),
+        ] = None,
+        client_secret: Annotated[
+            str | None,
+            typer.Option("--client-secret", help="Aspose Cloud client secret."),
+        ] = None,
+        storage_name: Annotated[
+            str | None,
+            typer.Option("--storage", help="Default Aspose storage name."),
+        ] = None,
+        base_url: Annotated[
+            str | None,
+            typer.Option("--base-url", help="Alternate Aspose PDF Cloud base URL."),
+        ] = None,
+        self_host: Annotated[
+            bool,
+            typer.Option("--self-host/--no-self-host", help="Use self-hosted Aspose PDF Cloud."),
+        ] = False,
+        force: Annotated[
+            bool,
+            typer.Option("--force", help="Overwrite existing Aspose.PDF values in the env file."),
+        ] = False,
 ) -> None:
     """Save Aspose.PDF credentials to a local .env file."""
 
@@ -167,12 +167,12 @@ def auth_login(
 
 @auth_app.command("test")
 def auth_test(
-    path: Annotated[
-        str,
-        typer.Option("--path", help="Storage folder path to list during validation."),
-    ] = "/",
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        path: Annotated[
+            str,
+            typer.Option("--path", help="Storage folder path to list during validation."),
+        ] = "/",
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
 ) -> None:
     """Validate Aspose.PDF credentials with a harmless storage API call."""
 
@@ -189,9 +189,9 @@ def auth_test(
 
 @storage_app.command("list")
 def list_storage_files(
-    path: Annotated[str, typer.Argument(help="Folder path in Aspose storage.")],
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        path: Annotated[str, typer.Argument(help="Folder path in Aspose storage.")],
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
 ) -> None:
     """List files and folders in Aspose storage."""
 
@@ -227,9 +227,9 @@ def list_storage_files(
 
 @storage_app.command("upload")
 def upload_storage_file(
-    local_path: Annotated[Path, typer.Argument(help="Local file to upload.")],
-    remote_path: Annotated[str, typer.Argument(help="Remote storage path.")],
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        local_path: Annotated[Path, typer.Argument(help="Local file to upload.")],
+        remote_path: Annotated[str, typer.Argument(help="Remote storage path.")],
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
 ) -> None:
     """Upload a local file to Aspose storage."""
 
@@ -239,14 +239,14 @@ def upload_storage_file(
 
 @storage_app.command("download")
 def download_storage_file(
-    remote_path: Annotated[str, typer.Argument(help="Remote storage path.")],
-    local_path: Annotated[Path, typer.Argument(help="Local output path.")],
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    version_id: Annotated[str | None, typer.Option("--version-id", help="File version ID.")] = None,
-    overwrite: Annotated[
-        bool,
-        typer.Option("--overwrite", help="Replace an existing local output file."),
-    ] = False,
+        remote_path: Annotated[str, typer.Argument(help="Remote storage path.")],
+        local_path: Annotated[Path, typer.Argument(help="Local output path.")],
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        version_id: Annotated[str | None, typer.Option("--version-id", help="File version ID.")] = None,
+        overwrite: Annotated[
+            bool,
+            typer.Option("--overwrite", help="Replace an existing local output file."),
+        ] = False,
 ) -> None:
     """Download a file from Aspose storage."""
 
@@ -264,17 +264,17 @@ def download_storage_file(
 
 @pdf_app.command("merge")
 def merge_pdf_files(
-    output_name: Annotated[str, typer.Argument(help="Output PDF name.")],
-    inputs: Annotated[
-        list[str] | None,
-        typer.Argument(help="Input PDF paths in storage."),
-    ] = None,
-    folder: Annotated[str | None, typer.Option("--folder", help="Output folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    from_folder: Annotated[
-        str | None,
-        typer.Option("--from-folder", help="Merge all PDF files from this storage folder."),
-    ] = None,
+        output_name: Annotated[str, typer.Argument(help="Output PDF name.")],
+        inputs: Annotated[
+            list[str] | None,
+            typer.Argument(help="Input PDF paths in storage."),
+        ] = None,
+        folder: Annotated[str | None, typer.Option("--folder", help="Output folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        from_folder: Annotated[
+            str | None,
+            typer.Option("--from-folder", help="Merge all PDF files from this storage folder."),
+        ] = None,
 ) -> None:
     """Merge PDF files already present in Aspose storage."""
 
@@ -287,14 +287,14 @@ def merge_pdf_files(
 
 @pdf_app.command("split")
 def split_pdf_document(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    ranges: Annotated[
-        str | None,
-        typer.Option("--ranges", help="Segments to create, for example 1-3,4,5-8."),
-    ] = None,
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        ranges: Annotated[
+            str | None,
+            typer.Option("--ranges", help="Segments to create, for example 1-3,4,5-8."),
+        ] = None,
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
 ) -> None:
     """Split a PDF into single pages or page-range segments."""
 
@@ -310,7 +310,7 @@ def split_pdf_document(
 
 @pdf_app.command("pdfa-versions")
 def list_pdfa_versions(
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
 ) -> None:
     """List PDF/A conversion targets supported by the installed SDK."""
 
@@ -331,19 +331,19 @@ def list_pdfa_versions(
 
 @pdf_app.command("convert-pdfa")
 def convert_pdf_to_pdfa(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    out_path: Annotated[str, typer.Argument(help="Output PDF/A path in storage.")],
-    pdfa_version: Annotated[
-        str,
-        typer.Option(
-            "--pdfa-version",
-            "--type",
-            help="PDF/A type/version. Run `pdf pdfa-versions` to list supported values.",
-        ),
-    ] = "PDF/A-1B",
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        out_path: Annotated[str, typer.Argument(help="Output PDF/A path in storage.")],
+        pdfa_version: Annotated[
+            str,
+            typer.Option(
+                "--pdfa-version",
+                "--type",
+                help="PDF/A type/version. Run `pdf pdfa-versions` to list supported values.",
+            ),
+        ] = "PDF/A-1B",
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
 ) -> None:
     """Convert a PDF in Aspose storage to a selected PDF/A version."""
 
@@ -368,17 +368,17 @@ def convert_pdf_to_pdfa(
 
 @pdf_app.command("extract-text")
 def extract_pdf_text(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
-    output: Annotated[
-        Path | None, typer.Option("--output", help="Write plain text to a file.")
-    ] = None,
-    overwrite: Annotated[
-        bool,
-        typer.Option("--overwrite", help="Replace an existing local output file."),
-    ] = False,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        as_json: Annotated[bool, typer.Option("--json", help="Emit JSON output.")] = False,
+        output: Annotated[
+            Path | None, typer.Option("--output", help="Write plain text to a file.")
+        ] = None,
+        overwrite: Annotated[
+            bool,
+            typer.Option("--overwrite", help="Replace an existing local output file."),
+        ] = False,
 ) -> None:
     """Extract text from a PDF in Aspose storage."""
 
@@ -396,21 +396,21 @@ def extract_pdf_text(
 
 @pdf_app.command("extract-tables")
 def extract_pdf_tables(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    pages: Annotated[
-        str | None,
-        typer.Option("--pages", help="Pages to scan, for example 1,3,4-7,10."),
-    ] = None,
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    output: Annotated[
-        Path | None,
-        typer.Option("--output", help="Write extracted table data as JSON."),
-    ] = None,
-    overwrite: Annotated[
-        bool,
-        typer.Option("--overwrite", help="Replace an existing local output file."),
-    ] = False,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        pages: Annotated[
+            str | None,
+            typer.Option("--pages", help="Pages to scan, for example 1,3,4-7,10."),
+        ] = None,
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        output: Annotated[
+            Path | None,
+            typer.Option("--output", help="Write extracted table data as JSON."),
+        ] = None,
+        overwrite: Annotated[
+            bool,
+            typer.Option("--overwrite", help="Replace an existing local output file."),
+        ] = False,
 ) -> None:
     """Extract tables from a PDF in Aspose storage."""
 
@@ -425,21 +425,21 @@ def extract_pdf_tables(
 
 @pdf_app.command("list-images")
 def list_pdf_images(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    pages: Annotated[
-        str | None,
-        typer.Option("--pages", help="Pages to scan, for example 1,3,4-7,10."),
-    ] = None,
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
-    output: Annotated[
-        Path | None,
-        typer.Option("--output", help="Write image metadata as JSON."),
-    ] = None,
-    overwrite: Annotated[
-        bool,
-        typer.Option("--overwrite", help="Replace an existing local output file."),
-    ] = False,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        pages: Annotated[
+            str | None,
+            typer.Option("--pages", help="Pages to scan, for example 1,3,4-7,10."),
+        ] = None,
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        output: Annotated[
+            Path | None,
+            typer.Option("--output", help="Write image metadata as JSON."),
+        ] = None,
+        overwrite: Annotated[
+            bool,
+            typer.Option("--overwrite", help="Replace an existing local output file."),
+        ] = False,
 ) -> None:
     """List images in a PDF in Aspose storage."""
 
@@ -454,21 +454,21 @@ def list_pdf_images(
 
 @pdf_app.command("extract-images")
 def extract_pdf_images(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    dest_folder: Annotated[
-        str,
-        typer.Argument(help="Aspose storage folder to receive extracted images."),
-    ],
-    pages: Annotated[
-        str | None,
-        typer.Option("--pages", help="Pages to extract, for example 1,3,4-7,10."),
-    ] = None,
-    image_format: Annotated[
-        str,
-        typer.Option("--format", help="Output format: gif, jpeg, jpg, png, or tiff."),
-    ] = "png",
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        dest_folder: Annotated[
+            str,
+            typer.Argument(help="Aspose storage folder to receive extracted images."),
+        ],
+        pages: Annotated[
+            str | None,
+            typer.Option("--pages", help="Pages to extract, for example 1,3,4-7,10."),
+        ] = None,
+        image_format: Annotated[
+            str,
+            typer.Option("--format", help="Output format: gif, jpeg, jpg, png, or tiff."),
+        ] = "png",
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
 ) -> None:
     """Extract all images from a PDF or selected pages."""
 
@@ -483,19 +483,19 @@ def extract_pdf_images(
 
 @pdf_app.command("extract-image")
 def extract_pdf_image(
-    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
-    page: Annotated[int, typer.Argument(help="One-based page number.")],
-    index: Annotated[int, typer.Argument(help="One-based image index on the page.")],
-    dest_folder: Annotated[
-        str,
-        typer.Argument(help="Aspose storage folder to receive the extracted image."),
-    ],
-    image_format: Annotated[
-        str,
-        typer.Option("--format", help="Output format: gif, jpeg, jpg, png, or tiff."),
-    ] = "png",
-    folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
-    storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
+        name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+        page: Annotated[int, typer.Argument(help="One-based page number.")],
+        index: Annotated[int, typer.Argument(help="One-based image index on the page.")],
+        dest_folder: Annotated[
+            str,
+            typer.Argument(help="Aspose storage folder to receive the extracted image."),
+        ],
+        image_format: Annotated[
+            str,
+            typer.Option("--format", help="Output format: gif, jpeg, jpg, png, or tiff."),
+        ] = "png",
+        folder: Annotated[str | None, typer.Option("--folder", help="Document folder.")] = None,
+        storage: Annotated[str | None, typer.Option("--storage", help="Storage name.")] = None,
 ) -> None:
     """Extract one image by its one-based index on a page."""
 
@@ -527,22 +527,22 @@ def serve_mcp() -> None:
 
 @skill_app.command("install")
 def install_agent_skill(
-    client: Annotated[
-        str,
-        typer.Argument(help="Target client: codex or claude-code."),
-    ],
-    target_dir: Annotated[
-        Path | None,
-        typer.Option("--target-dir", help="Custom skills directory to install into."),
-    ] = None,
-    project: Annotated[
-        bool,
-        typer.Option("--project", help="For Claude Code, install into ./.claude/skills."),
-    ] = False,
-    force: Annotated[
-        bool,
-        typer.Option("--force", help="Replace an existing aspose-pdf-cloud-mcp skill."),
-    ] = False,
+        client: Annotated[
+            str,
+            typer.Argument(help="Target client: codex or claude-code."),
+        ],
+        target_dir: Annotated[
+            Path | None,
+            typer.Option("--target-dir", help="Custom skills directory to install into."),
+        ] = None,
+        project: Annotated[
+            bool,
+            typer.Option("--project", help="For Claude Code, install into ./.claude/skills."),
+        ] = False,
+        force: Annotated[
+            bool,
+            typer.Option("--force", help="Replace an existing aspose-pdf-cloud-mcp skill."),
+        ] = False,
 ) -> None:
     """Install the bundled Aspose.PDF Cloud MCP skill for Codex or Claude Code."""
 

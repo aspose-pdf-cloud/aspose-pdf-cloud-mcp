@@ -42,11 +42,11 @@ class AsposePdfError(RuntimeError):
     default_code = "aspose_pdf_error"
 
     def __init__(
-        self,
-        message: str,
-        *,
-        code: str | None = None,
-        details: Mapping[str, Any] | None = None,
+            self,
+            message: str,
+            *,
+            code: str | None = None,
+            details: Mapping[str, Any] | None = None,
     ) -> None:
         self.code = code or self.default_code
         self.message = sanitize_message(message)

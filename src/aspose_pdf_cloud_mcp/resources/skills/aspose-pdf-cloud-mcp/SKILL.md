@@ -11,10 +11,12 @@ Use this skill for Aspose.PDF Cloud CLI / MCP work involving Aspose PDF Cloud.
 
 1. Determine whether the user wants setup, MCP usage, CLI usage, testing, docs, or troubleshooting.
 2. Prefer active MCP tools for storage/PDF operations when the Aspose.PDF MCP server is available.
-3. Use the `aspose-pdf-cloud-cli` / `apdf` CLI as a fallback when MCP tools are unavailable or the user asks for local commands.
-4. If the MCP server is available but does not expose the specific tool needed for the requested operation, fall back to the equivalent `apdf` CLI command and inform the user that the MCP tool was not available for that operation.
-5. **Priority rule**: If the user explicitly requests CLI commands, provide CLI commands even when MCP tools are active. Otherwise, default to MCP tools when the server is available.
-
+3. Use the `aspose-pdf-cloud-cli` / `apdf` CLI as a fallback when MCP tools are unavailable or the user asks for local
+   commands.
+4. If the MCP server is available but does not expose the specific tool needed for the requested operation, fall back to
+   the equivalent `apdf` CLI command and inform the user that the MCP tool was not available for that operation.
+5. **Priority rule**: If the user explicitly requests CLI commands, provide CLI commands even when MCP tools are active.
+   Otherwise, default to MCP tools when the server is available.
 
 ## MCP Operations
 
@@ -35,21 +37,33 @@ When Aspose.PDF MCP tools are active, use them for:
 
 ### Error Handling
 
-If an MCP tool returns an error, report its structured `code` and sanitized `message`, identify the likely cause (e.g., invalid credentials, missing file, wrong storage name), and suggest a corrective action before retrying. Never reconstruct or expose the underlying raw exception.
+If an MCP tool returns an error, report its structured `code` and sanitized `message`, identify the likely cause (e.g.,
+invalid credentials, missing file, wrong storage name), and suggest a corrective action before retrying. Never
+reconstruct or expose the underlying raw exception.
 
 ### Confirmation & Validation
 
-Before executing upload, merge-output, PDF/A conversion output, or download-overwrite operations, confirm the target path unless the user has provided a remote path that includes an explicit filename (e.g., `filename.pdf` or `folder/filename.pdf`) and has not used vague language like "somewhere" or "any folder".
+Before executing upload, merge-output, PDF/A conversion output, or download-overwrite operations, confirm the target
+path unless the user has provided a remote path that includes an explicit filename (e.g., `filename.pdf` or
+`folder/filename.pdf`) and has not used vague language like "somewhere" or "any folder".
 
-Skip confirmation only when ALL the following are true: (1) the user provided an explicit remote path including a filename, (2) the path contains no vague placeholders like "somewhere" or "any folder", and (3) the path field is not empty. In all other cases, confirm before executing.
+Skip confirmation only when ALL the following are true: (1) the user provided an explicit remote path including a
+filename, (2) the path contains no vague placeholders like "somewhere" or "any folder", and (3) the path field is not
+empty. In all other cases, confirm before executing.
 
-For `download_file`, always default to downloading the latest version of a file unless the user explicitly requests a specific version. Only ask for a version ID if the user's request implies a non-latest version (e.g., "the previous version", "version from last week").
+For `download_file`, always default to downloading the latest version of a file unless the user explicitly requests a
+specific version. Only ask for a version ID if the user's request implies a non-latest version (e.g., "the previous
+version", "version from last week").
 
-Local downloads and CLI output files do not overwrite existing files by default. Set `overwrite=true` or pass `--overwrite` only when the user explicitly requests replacement or has confirmed it.
+Local downloads and CLI output files do not overwrite existing files by default. Set `overwrite=true` or pass
+`--overwrite` only when the user explicitly requests replacement or has confirmed it.
 
 ## Setup
 
-For install/configuration tasks, read `references/setup.md`. If a referenced file cannot be read, tell the user which file is unavailable and what information is missing (e.g., "The full Codex/Claude Code config examples in references/mcp-config.md are unavailable; only the generic TOML snippet below can be provided"). Do not fabricate content that was meant to come from the missing file.
+For install/configuration tasks, read `references/setup.md`. If a referenced file cannot be read, tell the user which
+file is unavailable and what information is missing (e.g., "The full Codex/Claude Code config examples in
+references/mcp-config.md are unavailable; only the generic TOML snippet below can be provided"). Do not fabricate
+content that was meant to come from the missing file.
 
 Default install command:
 
@@ -117,6 +131,6 @@ Never print or commit real values for:
 
 Use `<redacted>` or `your-client-id` / `your-client-secret` in examples.
 
-If the user pastes what appears to be a real credential value (a non-placeholder string) into the conversation, 
-do not echo it back, warn the user that credentials should not be shared in chat, and ask them to rotate 
+If the user pastes what appears to be a real credential value (a non-placeholder string) into the conversation,
+do not echo it back, warn the user that credentials should not be shared in chat, and ask them to rotate
 the credential.

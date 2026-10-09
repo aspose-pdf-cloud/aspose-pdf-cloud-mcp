@@ -135,8 +135,8 @@ def redact_secret(value: str | None) -> str:
 
 
 def write_auth_env_file(
-    env_file: str | Path,
-    values: dict[str, str | bool | None],
+        env_file: str | Path,
+        values: dict[str, str | bool | None],
 ) -> Path:
     """Write Aspose.PDF auth settings to a .env file while preserving unrelated lines."""
 
