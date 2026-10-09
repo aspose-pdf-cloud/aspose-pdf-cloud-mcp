@@ -31,9 +31,6 @@ For local development from a checkout:
 python -m pip install -e ".[dev]"
 ```
 
-Maintainers: see [Publishing from GitHub](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/publishing.md)
-for PyPI trusted publisher setup and release instructions.
-
 ## Configuration
 
 Set credentials before running CLI commands or the MCP server. The easiest
