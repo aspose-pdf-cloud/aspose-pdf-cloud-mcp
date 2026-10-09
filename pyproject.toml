@@ -44,14 +44,13 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "build>=1.2.0",
-    "mypy>=1.17.0",
-    "pip-audit>=2.9.0",
+    "build>=1.2",
+    "mypy>=1.17.1",
+    "pip-audit>=2.10.1",
     "pytest>=9.1.1",
-    "pytest-cov>=6.2.0",
-    "pytest-mock>=3.12.0",
-    "ruff>=0.12.0",
-    "twine>=5.0.0",
+    "pytest-cov>=6.3.0",
+    "ruff>=0.16.10",
+    "twine>=6.2.0",
 ]
 
 [project.scripts]
@@ -65,51 +64,27 @@ Issues = "https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["aspose_pdf_cloud_mcp*"]
+namespaces = false
 
 [tool.setuptools.package-data]
 aspose_pdf_cloud_mcp = [
     "py.typed",
-    "resources/skills/*/SKILL.md",
-    "resources/skills/*/agents/*.yaml",
-    "resources/skills/*/references/*.md",
+    "resources/skills/aspose-pdf-cloud-mcp/SKILL.md",
+    "resources/skills/aspose-pdf-cloud-mcp/references/*.md",
+    "resources/skills/aspose-pdf-cloud-mcp/agents/*.yaml",
 ]
 
 [tool.setuptools_scm]
 version_file = "src/aspose_pdf_cloud_mcp/_version.py"
-write_to_source = true
 
 [tool.pytest.ini_options]
-markers = [
-    "live: tests that call the real Aspose.PDF Cloud API when credentials are present",
-]
+testpaths = ["test"]
+markers = ["live: opt-in tests that call the real Aspose Cloud API"]
 
 [tool.coverage.run]
-branch = true
 source = ["aspose_pdf_cloud_mcp"]
-omit = ["*/_version.py"]
 
 [tool.coverage.report]
 fail_under = 75
 show_missing = true
-skip_covered = true
-
-[tool.mypy]
-python_version = "3.11"
-files = ["src/aspose_pdf_cloud_mcp"]
-check_untyped_defs = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-
-[[tool.mypy.overrides]]
-module = ["asposepdfcloud", "asposepdfcloud.*"]
-ignore_missing_imports = true
-
-[tool.ruff]
-target-version = "py311"
-line-length = 100
-extend-exclude = ["src/aspose_pdf_cloud_mcp/_version.py"]
-
-[tool.ruff.lint]
-select = ["E4", "E7", "E9", "F", "I", "UP", "B"]

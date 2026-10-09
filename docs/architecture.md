@@ -34,8 +34,8 @@ Before opening a pull request, run:
 ```powershell
 python -m ruff format --check src test
 python -m ruff check src test
-python -m mypy
-python -m pytest -q --cov=aspose_pdf_cloud_mcp --cov-report=term-missing
+python -m mypy src/aspose_pdf_cloud_mcp
+python -m pytest -q -m "not live" --cov=aspose_pdf_cloud_mcp --cov-report=term-missing
 python -m pip_audit .
 python -m build
 python -m twine check dist/*
@@ -49,3 +49,4 @@ protected `live-tests` GitHub environment.
 Versions come from Git through `setuptools-scm`. Release commits must pass all
 quality gates before a `vX.Y.Z` tag is pushed. The tag triggers trusted PyPI
 publishing; never add a static version or PyPI token.
+See [publishing.md](publishing.md) for publisher registration and release steps.

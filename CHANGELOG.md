@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Setuptools build configuration, Git-based versions, development dependencies,
+  MIT license, and explicit bundled skill and typing data in distributions.
+- GitHub CI for unit coverage, distribution validation, and installed wheel smoke tests.
+- Tag-triggered PyPI trusted publishing, manual TestPyPI publishing, and a
+  separate opt-in live-test workflow.
+- Publishing setup and release instructions for maintainers.
+
 ### Changed
 
 - Upgrade the server to the MCP Python SDK 2.x `MCPServer` API.

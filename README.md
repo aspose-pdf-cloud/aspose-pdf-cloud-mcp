@@ -31,6 +31,9 @@ For local development from a checkout:
 python -m pip install -e ".[dev]"
 ```
 
+Maintainers: see [Publishing from GitHub](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/publishing.md)
+for PyPI trusted publisher setup and release instructions.
+
 ## Configuration
 
 Set credentials before running CLI commands or the MCP server. The easiest
@@ -56,7 +59,7 @@ Optional environment variables:
 - `ASPOSE_SELF_HOST`: set to `1`, `true`, `yes`, or `on` for self-hosted use.
 
 You can also create a local `.env` file. See
-[`.env.example`](.env.example) for a template. Environment variables take
+[`.env.example`](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/.env.example) for a template. Environment variables take
 precedence over `.env` values.
 
 ## CLI Usage
@@ -98,13 +101,13 @@ aspose-pdf-cloud-cli mcp serve
 ```
 
 Codex MCP configuration examples are available in
-[docs/mcp-config.md](docs/mcp-config.md), with a copy-pasteable helper at
-[examples/codex-mcp-config.toml](examples/codex-mcp-config.toml).
+[docs/mcp-config.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/mcp-config.md), with a copy-pasteable helper at
+[examples/codex-mcp-config.toml](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/examples/codex-mcp-config.toml).
 
 ## Codex Prompts
 
 Sample prompts for using this MCP server with Codex are in
-[docs/codex-prompts.md](docs/codex-prompts.md).
+[docs/codex-prompts.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/codex-prompts.md).
 
 ## Install as an Agent Skill
 
@@ -124,4 +127,4 @@ aspose-pdf-cloud-cli skill install claude-code --project
 ```
 
 Use `--force` to replace an existing installed copy. More details are in
-[docs/agent-skill.md](docs/agent-skill.md).
+[docs/agent-skill.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/agent-skill.md).
