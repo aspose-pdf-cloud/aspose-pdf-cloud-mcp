@@ -187,5 +187,53 @@ def extract_image(
     )
 
 
+@mcp.tool()
+def list_attachments(
+    name: str, folder: str | None = None, storage: str | None = None
+) -> ToolResponse:
+    """List embedded attachments with one-based indexes and metadata."""
+    return call_tool(operations.list_attachments, name, folder, storage)
+
+
+@mcp.tool()
+def extract_attachment(
+    name: str,
+    index: int,
+    local_path: str,
+    folder: str | None = None,
+    storage: str | None = None,
+    overwrite: bool = False,
+) -> ToolResponse:
+    """Download one embedded attachment to a local file."""
+    return call_tool(
+        operations.extract_attachment,
+        name,
+        index,
+        local_path,
+        folder,
+        storage,
+        overwrite=overwrite,
+    )
+
+
+@mcp.tool()
+def extract_attachments(
+    name: str,
+    output_dir: str,
+    folder: str | None = None,
+    storage: str | None = None,
+    overwrite: bool = False,
+) -> ToolResponse:
+    """Download all embedded attachments to a local directory."""
+    return call_tool(
+        operations.extract_attachments,
+        name,
+        output_dir,
+        folder,
+        storage,
+        overwrite=overwrite,
+    )
+
+
 def main() -> None:
     mcp.run()

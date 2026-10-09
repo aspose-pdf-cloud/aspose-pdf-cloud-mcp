@@ -516,6 +516,57 @@ def extract_pdf_image(
     )
 
 
+@pdf_app.command("list-attachments")
+def list_pdf_attachments(
+    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+    folder: Annotated[str | None, typer.Option("--folder")] = None,
+    storage: Annotated[str | None, typer.Option("--storage")] = None,
+) -> None:
+    """Show all embedded attachments and their one-based indexes as JSON."""
+    _json(_run(lambda: operations.list_attachments(name, folder, storage)))
+
+
+@pdf_app.command("extract-attachment")
+def extract_pdf_attachment(
+    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+    index: Annotated[int, typer.Argument(help="One-based attachment index.")],
+    local_path: Annotated[Path, typer.Argument(help="Local output file.")],
+    folder: Annotated[str | None, typer.Option("--folder")] = None,
+    storage: Annotated[str | None, typer.Option("--storage")] = None,
+    overwrite: Annotated[
+        bool, typer.Option("--overwrite", help="Replace existing output.")
+    ] = False,
+) -> None:
+    """Extract a single embedded attachment to a local file."""
+    _json(
+        _run(
+            lambda: operations.extract_attachment(
+                name, index, local_path, folder, storage, overwrite=overwrite
+            )
+        )
+    )
+
+
+@pdf_app.command("extract-attachments")
+def extract_pdf_attachments(
+    name: Annotated[str, typer.Argument(help="PDF name/path in storage.")],
+    output_dir: Annotated[Path, typer.Argument(help="Local output directory.")],
+    folder: Annotated[str | None, typer.Option("--folder")] = None,
+    storage: Annotated[str | None, typer.Option("--storage")] = None,
+    overwrite: Annotated[
+        bool, typer.Option("--overwrite", help="Replace existing output.")
+    ] = False,
+) -> None:
+    """Extract all embedded attachments to a local directory."""
+    _json(
+        _run(
+            lambda: operations.extract_attachments(
+                name, output_dir, folder, storage, overwrite=overwrite
+            )
+        )
+    )
+
+
 @mcp_app.command("serve")
 def serve_mcp() -> None:
     """Run the MCP server over stdio."""

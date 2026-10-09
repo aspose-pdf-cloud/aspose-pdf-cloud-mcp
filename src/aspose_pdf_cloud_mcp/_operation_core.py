@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import io
 import json
 from collections.abc import Callable, Sequence
+from contextlib import redirect_stdout
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -34,7 +36,10 @@ def _api_error(exc: Exception) -> AsposePdfToolError:
 
 def _call_api(func: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
     try:
-        return func(*args, **{k: v for k, v in kwargs.items() if v is not None})
+        # The SDK prints token endpoint diagnostics on stdout during authentication.
+        # Keep JSON output and the MCP stdio transport free of SDK chatter.
+        with redirect_stdout(io.StringIO()):
+            return func(*args, **{k: v for k, v in kwargs.items() if v is not None})
     except Exception as exc:  # noqa: BLE001 - SDK raises several exception shapes.
         api_exception = getattr(getattr(asposepdfcloud, "rest", None), "ApiException", None)
         if api_exception and isinstance(exc, api_exception):

@@ -125,3 +125,27 @@ aspose-pdf-cloud-cli skill install claude-code --project
 
 Use `--force` to replace an existing installed copy. More details are in
 [docs/agent-skill.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/agent-skill.md).
+# Extract PDF attachments
+
+The PDF must already be in Aspose storage. List embedded files, download one
+by its one-based index, or download all of them:
+
+```powershell
+apdf pdf list-attachments sample.pdf
+apdf pdf extract-attachment sample.pdf 1 ./report.txt
+apdf pdf extract-attachments sample.pdf ./attachments
+```
+
+All three commands support `--folder` and `--storage`. Extraction writes local
+files and refuses existing outputs unless `--overwrite` is specified. Bulk
+extraction prefixes filenames with their index (for example `1-report.txt`),
+preserving duplicate names safely. Unsafe embedded filenames are rejected
+before downloads. Empty PDFs produce an empty list. Each local file is written
+atomically; a later download failure can leave earlier completed files.
+
+Equivalent MCP tools are `list_attachments(name, folder, storage)`,
+`extract_attachment(name, index, local_path, folder, storage, overwrite)`, and
+`extract_attachments(name, output_dir, folder, storage, overwrite)`. Listing
+returns `attachments` with metadata and `index`; single extraction returns
+`local_path`; bulk extraction returns `attachments`, `output_dir`, and `files`.
+These tools use the standard MCP success/error envelope.
