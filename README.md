@@ -1,7 +1,11 @@
-# Aspose.PDF Cloud CLI + MCP Tools
+# Aspose.PDF Cloud CLI + MCP Tools v1.1.0
 
 Aspose.PDF Cloud CLI exposes Aspose PDF Cloud storage and PDF operations through
 both a command-line interface and an MCP server.
+
+Version 1.1.0 adds PDF attachment listing and extraction, upgrades the MCP
+server to the MCP Python SDK 2.x, and adds Git-based package versioning and
+release automation. See [CHANGELOG.md](CHANGELOG.md) for the release notes.
 
 ## How to Get Your Aspose.PDF Cloud Credentials
 
@@ -11,6 +15,9 @@ both a command-line interface and an MCP server.
 4. Copy the **Client ID** and **Client Secret** for later use.
 
 ## Installation
+
+Requires Python 3.11 or later. Version 1.1.0 uses Aspose.PDF Cloud SDK 26.x
+and MCP Python SDK 2.x; pip installs these dependencies automatically.
 
 Install from PyPI:
 
@@ -125,7 +132,8 @@ aspose-pdf-cloud-cli skill install claude-code --project
 
 Use `--force` to replace an existing installed copy. More details are in
 [docs/agent-skill.md](https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-mcp/blob/main/docs/agent-skill.md).
-# Extract PDF attachments
+
+## Extract PDF attachments
 
 The PDF must already be in Aspose storage. List embedded files, download one
 by its one-based index, or download all of them:

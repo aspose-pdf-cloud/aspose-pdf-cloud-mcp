@@ -5,13 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 2026-10-09
 
 ### Added
 
 - List PDF embedded attachments and extract one or all to local files through
   equivalent CLI commands and MCP tools, with atomic writes and overwrite protection.
-
 - Setuptools build configuration, Git-based versions, development dependencies,
   MIT license, and explicit bundled skill and typing data in distributions.
 - GitHub CI for unit coverage, distribution validation, and installed wheel smoke tests.
@@ -22,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Suppress SDK authentication stdout diagnostics to preserve CLI JSON and MCP stdio.
-
 - Upgrade the server to the MCP Python SDK 2.x `MCPServer` API.
 - Advertise the generated SCM package version in the MCP server identity.
 
