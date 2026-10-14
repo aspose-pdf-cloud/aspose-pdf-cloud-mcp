@@ -55,7 +55,7 @@ jobs:
           python -m venv /tmp/apdf-wheel
           /tmp/apdf-wheel/bin/python -m pip install dist/*.whl
           /tmp/apdf-wheel/bin/python scripts/smoke_test.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: distributions
           path: dist/*
